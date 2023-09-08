@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import github.preeti5sharon.universitiesapp.databinding.RvItemBinding
 
-class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapter(private val itemOnClickListener: onClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class RVViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -44,5 +45,8 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val item = asyncDiffer.currentList.getOrNull(position)
         binding.state.text = item?.stateProvince.toString()
         binding.uniName.text = item?.name.toString()
+        binding.rvItem.setOnClickListener {
+            itemOnClickListener.onClickListener(position, item)
+        }
     }
 }
